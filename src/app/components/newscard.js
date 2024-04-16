@@ -3,6 +3,8 @@ import React from "react";
 import { CiShare2 } from "react-icons/ci";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
+import Image from "next/image";
+
 const Newscard = () => {
   const WheelControls = (slider) => {
     let touchTimeout;
