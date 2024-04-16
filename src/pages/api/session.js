@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   );
   const { query } = req.body;
   const accessKey = "adb0cfcc77074ab38735db68a601a3a0";
-  const endpoint = `https://api.bing.microsoft.com/v7.0/search?q=${query}&safeSearch=Strict&mkt=en-IN&responseFilter=news`;
+  const endpoint = `https://api.bing.microsoft.com/v7.0/search?q=${query}&count=5&offset=0&safeSearch=Strict&mkt=en-IN&responseFilter=news`;
   try {
     const response = await axios.get(endpoint, {
       headers: {
@@ -25,7 +25,6 @@ export default async function handler(req, res) {
       description: item.description,
       imageUrl: item.image?.contentUrl || null,
     }));
-    console.log(formattedNews);
     return res.status(200).json({ newsdata: formattedNews });
   } catch (error) {
     return res.status(500).json({ error: "Internal Server Error" });

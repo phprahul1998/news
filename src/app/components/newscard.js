@@ -93,12 +93,12 @@ const Newscard = () => {
   return (
     <div>
       <div ref={sliderRef} className="keen-slider">
-        {/* <button style={{ zIndex: "9999" }} onClick={getNewsFeeds}>
+        <button style={{ zIndex: "9999" }} onClick={getNewsFeeds}>
           get news
-        </button> */}
+        </button>
         {newsData.map((item, index) => (
           <div className="keen-slider__slide" key={index}>
-            <div className="NewsCard" style={{ backgroundColor: "red" }}>
+            <div className="NewsCard" style={{ backgroundColor: "#0c8898" }}>
               <div className="newImg">
                 <img src={item.imageUrl} alt="" />
               </div>
