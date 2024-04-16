@@ -8,10 +8,11 @@ import { useKeenSlider } from "keen-slider/react";
 
 const Newscard = () => {
   const [newsData, setNewsData] = useState([]);
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getNewsFeeds();
+  }, []);
 
   function getNewsFeeds() {
-    console.log("rahul");
     axios
       .post("/api/session", {
         query: "Top Stories of india",
@@ -92,9 +93,9 @@ const Newscard = () => {
   return (
     <div>
       <div ref={sliderRef} className="keen-slider">
-        <button style={{ zIndex: "9999" }} onClick={getNewsFeeds}>
+        {/* <button style={{ zIndex: "9999" }} onClick={getNewsFeeds}>
           get news
-        </button>
+        </button> */}
         {newsData.map((item, index) => (
           <div className="keen-slider__slide" key={index}>
             <div className="NewsCard" style={{ backgroundColor: "red" }}>
