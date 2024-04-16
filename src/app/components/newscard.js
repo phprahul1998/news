@@ -97,7 +97,7 @@ const Newscard = () => {
         <div
           className="NewsCard"
           key={index}
-          style={{ backgroundColor: "#5e6363" }}
+          style={{ backgroundColor: "#000" }}
         >
           <div className="newImg">
             <img src={item.imageUrl} alt="" />
