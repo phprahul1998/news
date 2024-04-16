@@ -90,29 +90,27 @@ const Newscard = () => {
     },
     [WheelControls]
   );
+
   return (
     <div>
-      <div ref={sliderRef} className="keen-slider">
-        <button style={{ zIndex: "9999" }} onClick={getNewsFeeds}>
-          get news
-        </button>
-        {newsData.map((item, index) => (
-          <div className="keen-slider__slide" key={index}>
-            <div className="NewsCard" style={{ backgroundColor: "#0c8898" }}>
-              <div className="newImg">
-                <img src={item.imageUrl} alt="" />
-              </div>
-              <div className="newsdata">
-                <h1>{item.name}</h1>
-                <p>{item.description}</p>
-                <div>
-                  <CiShare2 />
-                </div>
-              </div>
+      {newsData.map((item, index) => (
+        <div
+          className="NewsCard"
+          key={index}
+          style={{ backgroundColor: "#5e6363" }}
+        >
+          <div className="newImg">
+            <img src={item.imageUrl} alt="" />
+          </div>
+          <div className="newsdata">
+            <h1>{item.name}</h1>
+            <p>{item.description}</p>
+            <div>
+              <CiShare2 />
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 };
