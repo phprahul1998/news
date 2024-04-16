@@ -22,7 +22,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div class="container-fluid d-flex justify-content-center footer-section">
+          <div className="container-fluid d-flex justify-content-center footer-section">
             <Footer />
           </div>
         </div>

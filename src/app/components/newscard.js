@@ -1,11 +1,29 @@
 "use client";
-import React from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Image from "next/image";
 import { CiShare2 } from "react-icons/ci";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
-import Image from "next/image";
 
 const Newscard = () => {
+  const [newsData, setNewsData] = useState([]);
+  useEffect(() => {}, []);
+
+  function getNewsFeeds() {
+    console.log("rahul");
+    axios
+      .post("/api/session", {
+        query: "Top Stories of india",
+      })
+      .then((response) => {
+        // const news = response.data;
+        console.log(response.data["newsdata"]);
+        setNewsData(response.data["newsdata"]);
+      })
+      .catch((error) => {});
+  }
+
   const WheelControls = (slider) => {
     let touchTimeout;
     let position;
@@ -74,72 +92,25 @@ const Newscard = () => {
   return (
     <div>
       <div ref={sliderRef} className="keen-slider">
-        <div className="keen-slider__slide">
-          <div className="NewsCard" style={{ backgroundColor: "#515f3f" }}>
-            <div className="newImg">
-              <img src="/first.webp" alt="" />
-            </div>
-            <div className="newsdata">
-              <h1>Billie Eilish joins musicians rallying against AI</h1>
-              <p>
-                Billie Eilish is one of nearly 250 prominent musicians who have
-                called for tech and music outfits to stop misusing artificial
-                intelligence, claiming the technology is being used to devalue
-                music, infringe upon the rights of artists, and is an “assault
-                on human creativity”.
-              </p>
-              <div>
-                <CiShare2 />
+        <button style={{ zIndex: "9999" }} onClick={getNewsFeeds}>
+          get news
+        </button>
+        {newsData.map((item, index) => (
+          <div className="keen-slider__slide" key={index}>
+            <div className="NewsCard" style={{ backgroundColor: "red" }}>
+              <div className="newImg">
+                <img src={item.imageUrl} alt="" />
+              </div>
+              <div className="newsdata">
+                <h1>{item.name}</h1>
+                <p>{item.description}</p>
+                <div>
+                  <CiShare2 />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="keen-slider__slide">
-          <div className="NewsCard" style={{ backgroundColor: "#30333f" }}>
-            <div className="newImg">
-              <img src="/second.webp" alt="" />
-            </div>
-            <div className="newsdata">
-              <h1>
-                Inside Mark Zuckerberg's controversial decision to turn down
-                Yahoo's $1 billion early offer to buy Facebook
-              </h1>
-              <p>
-                This is an excerpt from the book "Becoming Facebook" by Mike
-                Hoefflinger. It's the inside story of Facebook told by the
-                former Head of Global Business Marketing, chronicling the 10
-                major decisions Facebook made that led from their disastrous
-                stock drop in 2012 to one of the biggest companies in the world.
-              </p>
-              <div>
-                <CiShare2 />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="keen-slider__slide">
-          <div className="NewsCard" style={{ backgroundColor: "#5d2601" }}>
-            <div className="newImg">
-              <img src="/third.jpg" alt="" />
-            </div>
-            <div className="newsdata">
-              <h1>
-                Robert Kiyosaki Reacts to Prediction of Bitcoin Price Dropping
-                to $200
-              </h1>
-              <p>
-                The author of Rich Dad Poor Dad, Robert Kiyosaki, has responded
-                to some predictions by economist and best-selling author Harry
-                Dent, including one about bitcoin’s price crashing to $200. Rich
-                Dad Poor Dad is a 1997 book co-authored by Kiyosaki and Sharon
-                Lechter.
-              </p>
-              <div>
-                <CiShare2 />
-              </div>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
